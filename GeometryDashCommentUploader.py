@@ -12,7 +12,6 @@ async def main():
         d = int(input('ID of level, that you wanna comment: '))
         tms = int(input('How many comments do you want? (1-4): '))
         client = gd.Client()
-        #await client.login(a, b)
         level = await client.get_level(d)
         for i in range(tms):
             await client.login(a, b)
