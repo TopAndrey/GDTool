@@ -1,5 +1,8 @@
 # GDTool
 Geometry Dash Toolkit
+.. image:: https://img.shields.io/pypi/l/gd.py.svg
+    :target: https://opensource.org/licenses/MIT
+    :alt: Project License
 
 
 # Installation
