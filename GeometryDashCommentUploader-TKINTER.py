@@ -2,9 +2,16 @@ import gd
 import asyncio
 import time
 from tkinter import *
+from tkinter import messagebox as mb
+
 upd = 1
 c = str()
 d = int()
+b = Entry()
+a = Entry()
+passhide = 0
+r_var = BooleanVar()
+r_var.set(0)
 
 def tkinter():
     global upd
@@ -15,6 +22,10 @@ def tkinter():
     global tms
     async def onClick():
         async def onClick2():
+            f = open("SavedData.txt", "w+")
+            f.write(a.get()+'\n'+b.get()+'\n'+c.get()+'\n'+d.get())
+            f.close()
+
             while upd == 1: 
                 client = gd.Client()
                 level = await client.get_level(int(d.get()))
@@ -31,7 +42,7 @@ def tkinter():
                         lbl2['text'] = 'Comment Uploaded!','('+(str(i+1))+')'
         btn = Button(root, text='UPLOAD!', font = 50, command = lambda: asyncio.run(onClick2()))
         btn.pack(side=TOP)
-        
+
     root = Tk()
     root.geometry('300x300')
     lb1 = Label(root, text='GD CommentBot', font=('Fixedsys', 25))     #d43c31 , #5eff00 , #00ddff
@@ -40,17 +51,44 @@ def tkinter():
     b = Entry(root, font = ('Arial Bold',15))
     a.insert(0, 'Username')
     b.insert(0, 'Password')
+    b['fg'] = 'black'
     a.pack()
     b.pack()
     c = Entry(root, font = ('Arial', 14))
     c.insert(0, 'Comment')
     c.pack(pady=4)
-    d = Entry(root, font = ('Arial', 14))
+    d = Entry(root, font = ('Arial', 14))               
     d.insert(0, 'ID of level')
     d.pack()
     tms = Entry(root, font = ('Arial', 14))                 
     tms.insert(0, 'How many comments?')
     tms.pack(pady=4)
+    def restore():
+        global a
+        global b
+        global d
+        global tms
+        f = open("SavedData.txt", "r")
+        a.delete(0, END)
+        a.insert(0, f.readline())
+        b.delete(0, END)
+        b.insert(0, f.readline())
+        c.delete(0, END)
+        c.insert(0, f.readline())
+        d.delete(0, END)
+        d.insert(0, f.readline())
+        tms.delete(0, END)
+        tms.insert(0, int(1))
+
+
+    def settings():
+        restore()
+        mb.showinfo(
+            "SUCESS!", 
+            "DATA RESTORED SUCSESSFUL!!!")
+
+    sett = Button(root, text = '⭳', font=('Imprint MT Shadow', 12, 'bold'), command=settings)
+    sett.place(relx=0.87, rely=0.03)
     lbl2 = Label(root)
     asyncio.run(onClick())
     
