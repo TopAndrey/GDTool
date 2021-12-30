@@ -70,13 +70,13 @@ def tkinter():
         global tms
         f = open("SavedData.txt", "r")
         a.delete(0, END)
-        a.insert(0, f.readline())
+        a.insert(0, f.readline().strip())
         b.delete(0, END)
-        b.insert(0, f.readline())
+        b.insert(0, f.readline().strip())
         c.delete(0, END)
-        c.insert(0, f.readline())
+        c.insert(0, f.readline().strip())
         d.delete(0, END)
-        d.insert(0, f.readline())
+        d.insert(0, f.readline().strip())
         tms.delete(0, END)
         tms.insert(0, int(1))
 
